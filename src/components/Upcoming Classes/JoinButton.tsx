@@ -1,4 +1,3 @@
-import React from "react";
 import { LuExternalLink } from "react-icons/lu";
 
 const JoinButton = () => {

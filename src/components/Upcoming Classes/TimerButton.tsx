@@ -1,5 +1,4 @@
 import { formatDuration } from "@/utils/formatTime";
-import React from "react";
 import { LuClock } from "react-icons/lu";
 
 const TimerButton = ({ timeRemaining }: { timeRemaining: number }) => {

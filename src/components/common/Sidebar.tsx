@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdOutlineLogout } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { MdOutlinePeopleAlt } from "react-icons/md";
