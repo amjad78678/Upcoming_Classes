@@ -1,7 +1,12 @@
-
+import {motion} from 'framer-motion'
 const Navbar = () => {
   return (
-    <div className="px-10 py-5 flex flex-col">
+    <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -100 }}
+      transition={{ duration: 0.5 }}
+     className="px-10 py-5 flex flex-col">
       <div className="flex justify-start items-center ">
         <div className=" flex gap-6 text-gray-400">
           <h1>Blogs</h1>
@@ -13,7 +18,7 @@ const Navbar = () => {
       <div className="flex justify-start items-center">
         <h1 className="font-bold text-4xl mt-4">Dashboard</h1>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

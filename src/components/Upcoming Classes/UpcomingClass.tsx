@@ -50,7 +50,7 @@ const UpcomingClass = () => {
     return () => clearInterval(interval);
   }, [dispatch, staffDetails]);
 
-  // For pagination 
+  // For pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const totalPages = Math.ceil(staffDetails.length / itemsPerPage);
@@ -147,7 +147,7 @@ const UpcomingClass = () => {
         </tbody>
       </table>
 
-      <Pagination>
+      <Pagination className="cursor-pointer">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

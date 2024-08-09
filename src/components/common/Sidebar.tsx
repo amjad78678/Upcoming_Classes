@@ -4,6 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { LuFileText } from "react-icons/lu";
 import { LuBarChart2 } from "react-icons/lu";
+import {motion} from 'framer-motion'
 
 const Sidebar = () => {
   const [currentTab, setCurrentTab] = useState("Dashboard");
@@ -15,7 +16,12 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className="flex flex-col justify-between h-full py-8 pl-8">
+    <motion.div
+    initial={{x:-50, opacity:0}}
+    animate={{x:0, opacity:1}}
+    exit={{x:-50, opacity:0}}
+    transition={{duration:0.5}}
+    className="flex flex-col justify-between h-full py-8 pl-8">
       <div className="flex flex-col gap-10">
         <div className="bg-white flex gap-3">
           <div className="w-10 h-10 bg-gray-200"></div>
@@ -105,7 +111,7 @@ const Sidebar = () => {
           Log out
         </h1>
       </button>
-    </div>
+    </motion.div>
   );
 };
 export default Sidebar;

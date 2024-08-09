@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { setStaffTimer } from "@/store/slices/appSlice";
 import { formatDuration } from "@/utils/formatTime";
+import { motion } from "framer-motion";
 
 const BookNowButton = ({
   userId,
@@ -36,7 +37,9 @@ const BookNowButton = ({
 
   return (
     <>
-      <button
+      <motion.button
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
         disabled={timerDuration < 1}
         onClick={handleBookNow}
         className=" py-4 px-2  flex justify-start items-center "
@@ -50,7 +53,7 @@ const BookNowButton = ({
             {timerDuration < 1 ? "Book later" : "Book now"}
           </div>
         </div>
-      </button>
+      </motion.button>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
