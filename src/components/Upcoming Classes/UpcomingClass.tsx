@@ -61,7 +61,7 @@ const UpcomingClass = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="my-4">
+    <div className="my-4 ">
       <table className="w-full border-collapse border-b mb-4">
         <thead>
           <tr className="text-gray-500 text-lg bg-gray-100 text-start">

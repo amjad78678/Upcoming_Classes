@@ -1,22 +1,20 @@
-
 ## Running the Project Locally
 
 To get started with running the project locally, follow these steps:
 
 1. Clone the repository:
-git clone https://github.com/amjad78678/Upcoming_Classes.git
+   git clone https://github.com/amjad78678/Upcoming_Classes.git
 
 2. Navigate to the project folder:
-cd Upcoming_Classes
+   cd Upcoming_Classes
 
 3. Install dependencies:
-npm install
+   npm install
 
 4. Start the development server:
-npm start
+   npm start
 
 The project will run locally at http://localhost:3000.
-
 
 ## How to Set Class Times for Upcoming Classes
 

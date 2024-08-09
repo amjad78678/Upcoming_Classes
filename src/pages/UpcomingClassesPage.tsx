@@ -11,9 +11,9 @@ const UpcomingClassesPage = () => {
           <Sidebar />
         </div>
 
-        <div className="col-span-10">
+        <div className="col-span-10 ">
           <Navbar />
-          <div className="px-10">
+          <div className="px-10 bg-white">
             <Head />
             <UpcomingClass />
           </div>
