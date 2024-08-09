@@ -75,12 +75,12 @@ const UpcomingClass = () => {
             currentItems.map((data) => (
               <>
                 <tr key={data.id} className="border-b ">
-                  <td className="py-4 px-2 ">
+                  <td className="py-4 px-2  w-5/12">
                     <div className="flex gap-4">
                       <div className="w-10 h-10 flex justify-center items-center">
                         <span>{data.id}</span>
                       </div>
-                      <div className=" flex flex-col justify-center items-start">
+                      <div className="flex flex-col justify-center items-start ">
                         <span className="font-bold">{data.className}</span>
                         {data.isLive ? (
                           <div className="">
@@ -101,7 +101,7 @@ const UpcomingClass = () => {
                     </div>
                   </td>
 
-                  <td className="py-4 px-2 ">
+                  <td className="py-4 px-2 w-5/12">
                     <div className="flex gap-4 justify-start items-center">
                       <div>
                         <Avatar>
