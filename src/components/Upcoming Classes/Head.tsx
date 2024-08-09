@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { setStaffDetails } from "@/store/slices/appSlice";
+import StaffDetails from "@/interfaces/iClassData";
 
 const Head = () => {
+  const { staffDetails } = useSelector((state: RootState) => state.appData);
+  const [checked, setChecked] = useState(false);
+  const [originalStaffDetails, setOriginalStaffDetails] = useState<StaffDetails[]>([]);
+  const dispatch = useDispatch();
+  const handleBookedFilter = () => {
+    setChecked(!checked);
+
+    if (!checked) {
+      setOriginalStaffDetails(staffDetails);
+
+      const filteredStaffDetails = staffDetails.filter(
+        (staff) => staff.isLive || staff.isBooked
+      );
+
+      dispatch(setStaffDetails(filteredStaffDetails));
+    } else {
+      dispatch(setStaffDetails(originalStaffDetails));
+    }
+  };
+
   return (
     <div className="flex justify-between">
       <div>
@@ -14,13 +38,10 @@ const Head = () => {
           Booked only
         </h1>
 
-        <input
-          className="appearance-none w-5 h-5 rounded border border-gray-300"
-          type="checkbox"
-          name=""
-          id=""
+        <Checkbox
+          onClick={handleBookedFilter}
+          className="rounded-md p-3 border border-gray-300 bg-transparent"
         />
-       {/* <Checkbox id="terms1" /> */}
       </div>
     </div>
   );
