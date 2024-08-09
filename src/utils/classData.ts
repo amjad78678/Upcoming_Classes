@@ -10,7 +10,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "surya.jpg",
-    classTime: "2024-08-09T00:00:00", // 08/09/2024 12:00 AM
+    classTime: "2024-08-09T10:10:00",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "priya.jpg",
-    classTime: "2024-08-09T00:15:00", // 08/09/2024 12:15 AM
+    classTime: "2024-08-09T00:15:00",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "leslie.jpg",
-    classTime: "2024-08-09T00:30:00", // 08/09/2024 12:30 AM
+    classTime: "2024-08-09T00:30:00",
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "courtney.jpg",
-    classTime: "2024-08-09T00:45:00", // 08/09/2024 12:45 AM
+    classTime: "2024-08-09T00:45:00",
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "jerome.jpg",
-    classTime: "2024-08-09T01:00:00", // 08/09/2024 01:00 AM
+    classTime: "2024-08-09T01:00:00",
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "arlene.jpg",
-    classTime: "2024-08-09T01:15:00", // 08/09/2024 01:15 AM
+    classTime: "2024-08-09T01:15:00",
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "arlene.jpg",
-    classTime: "2024-08-09T01:30:00", // 08/09/2024 01:30 AM
+    classTime: "2024-08-09T01:30:00",
   },
   {
     id: 8,
@@ -101,7 +101,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "arlene.jpg",
-    classTime: "2024-08-09T01:45:00", // 08/09/2024 01:45 AM
+    classTime: "2024-08-09T01:45:00",
   },
   {
     id: 9,
@@ -114,7 +114,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "arlene.jpg",
-    classTime: "2024-08-09T02:00:00", // 08/09/2024 02:00 AM
+    classTime: "2024-08-09T09:40:00",
   },
   {
     id: 10,
@@ -127,7 +127,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "arlene.jpg",
-    classTime: "2024-08-09T02:15:00", // 08/09/2024 02:15 AM
+    classTime: "2024-08-09T10:32:00",
   },
 ];
 

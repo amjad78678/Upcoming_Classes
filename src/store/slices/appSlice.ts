@@ -1,3 +1,4 @@
+import StaffDetails from "@/interfaces/iClassData";
 import classData from "@/utils/classData";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -11,23 +12,34 @@ const appSlice = createSlice({
       state.staffDetails = action.payload;
     },
     setStaffTimer: (state, action) => {
-      const { classIndex, timerDuration } = action.payload;
+      const { userId, timerDuration } = action.payload;
       const currentTime = Date.now();
       const timerEndTime = currentTime + timerDuration * 1000;
+      const staffIndex = state.staffDetails.findIndex(
+        (staff: StaffDetails) => staff.id === userId
+      );
 
-      state.staffDetails[classIndex] = {
-        ...state.staffDetails[classIndex],
-        isBooked: true,
-        timerEndTime,
-        timeRemaining: timerDuration,
-        isLive: false,
-        classStartTime: 0,
-        timeLive: 0,
-      };
+      console.log("iam staffIndex", staffIndex);
+
+      if (staffIndex !== -1) {
+        state.staffDetails[staffIndex] = {
+          ...state.staffDetails[staffIndex],
+          isBooked: true,
+          timerEndTime,
+          timeRemaining: timerDuration,
+          isLive: false,
+          classStartTime: 0,
+          timeLive: 0,
+        };
+      }
     },
+
     updateTimer: (state, action) => {
-      const { classIndex, timeRemaining } = action.payload;
-      const staff = state.staffDetails[classIndex];
+      const { userId, timeRemaining } = action.payload;
+      const staffIndex = state.staffDetails.findIndex(
+        (staff: StaffDetails) => staff.id === userId
+      );
+      const staff = state.staffDetails[staffIndex];
 
       if (timeRemaining <= 0 && !staff.isLive) {
         // Timer has ended, starting the class as live
@@ -41,11 +53,15 @@ const appSlice = createSlice({
       }
     },
     updateLiveTime: (state, action) => {
-      const { classIndex, timeLive } = action.payload;
-      state.staffDetails[classIndex].timeLive = timeLive;
+      const { userId, timeLive } = action.payload;
+      const staffIndex = state.staffDetails.findIndex(
+        (staff: StaffDetails) => staff.id === userId
+      );
+      state.staffDetails[staffIndex].timeLive = timeLive;
     },
   },
 });
 
-export const { setStaffTimer, updateTimer, updateLiveTime, setStaffDetails } = appSlice.actions;
+export const { setStaffTimer, updateTimer, updateLiveTime, setStaffDetails } =
+  appSlice.actions;
 export default appSlice.reducer;

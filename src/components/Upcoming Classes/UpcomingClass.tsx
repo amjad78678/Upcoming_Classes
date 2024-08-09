@@ -9,14 +9,23 @@ import { updateLiveTime, updateTimer } from "@/store/slices/appSlice";
 import { formatTime } from "@/utils/formatTime";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 dayjs.extend(isToday);
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
 
 const UpcomingClass = () => {
   const { staffDetails } = useSelector((state: RootState) => state.appData);
+
   const dispatch = useDispatch();
-  const [durationBook] = useState<number>(10);
   useEffect(() => {
     const interval = setInterval(() => {
       staffDetails.forEach((staff, index) => {
@@ -26,13 +35,13 @@ const UpcomingClass = () => {
             Math.floor((staff.timerEndTime - Date.now()) / 1000)
           );
 
-          dispatch(updateTimer({ classIndex: index, timeRemaining }));
+          dispatch(updateTimer({ userId: staff.id, timeRemaining }));
         } else if (!staff.isBooked && staff.isLive) {
           // Updating live time if the class is live
           const timeLive = Math.floor(
             (Date.now() - staff.classStartTime) / 1000
           );
-          dispatch(updateLiveTime({ classIndex: index, timeLive }));
+          dispatch(updateLiveTime({ userId: staff.id, timeLive }));
         }
       });
     }, 1000);
@@ -40,9 +49,21 @@ const UpcomingClass = () => {
     return () => clearInterval(interval);
   }, [dispatch, staffDetails]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  // Calculating the total pages
+  const totalPages = Math.ceil(staffDetails.length / itemsPerPage);
+  // Determine the items to be shown on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = staffDetails.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Function to change the page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="my-4">
-      <table className="w-full border-collapse border-b">
+      <table className="w-full border-collapse border-b mb-4">
         <thead>
           <tr className="text-gray-500 text-lg bg-gray-100 text-start">
             <th className="py-4 px-8 text-start">Class name</th>
@@ -52,7 +73,7 @@ const UpcomingClass = () => {
         </thead>
 
         <tbody className="">
-          {staffDetails.map((data, index) => (
+          {currentItems.map((data, index) => (
             <tr key={data.id} className="border-b">
               <td className="py-4 px-2 ">
                 <div className="flex gap-4">
@@ -73,7 +94,6 @@ const UpcomingClass = () => {
                       </div>
                     ) : dayjs(data.classTime).isToday() ? (
                       <p>Today {dayjs(data.classTime).format("h:mm A")}</p>
-
                     ) : (
                       <p>{dayjs(data.classTime).format("Do MMMM hA")}</p>
                     )}
@@ -103,7 +123,7 @@ const UpcomingClass = () => {
                   <JoinButton />
                 ) : (
                   <BookNowButton
-                    classIndex={index}
+                    userId={data.id}
                     timerDuration={Math.max(
                       0,
                       dayjs(data.classTime).diff(dayjs(), "second")
@@ -115,6 +135,37 @@ const UpcomingClass = () => {
           ))}
         </tbody>
       </table>
+
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => paginate(Math.max(1, currentPage - 1))}
+            />
+          </PaginationItem>
+
+          {[...Array(totalPages)].map((_, index) => (
+            <PaginationItem key={index}>
+              <PaginationLink
+                className={
+                  currentPage === index + 1
+                    ? "bg-blue-500 text-white hover:bg-blue-400 hover:text-white"
+                    : ""
+                }
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+          <PaginationItem></PaginationItem>
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };

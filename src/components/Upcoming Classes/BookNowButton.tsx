@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { setStaffTimer } from "@/store/slices/appSlice";
 
-const BookNowButton = ({ classIndex, timerDuration }) => {
+const BookNowButton = ({ userId, timerDuration }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dispatch = useDispatch();
   const handleBookNow = () => {
@@ -18,7 +18,7 @@ const BookNowButton = ({ classIndex, timerDuration }) => {
   };
 
   const handleConfirm = () => {
-    dispatch(setStaffTimer({ classIndex, timerDuration }));
+    dispatch(setStaffTimer({ userId, timerDuration }));
     setIsDialogOpen(false);
   };
 
@@ -33,7 +33,11 @@ const BookNowButton = ({ classIndex, timerDuration }) => {
         onClick={handleBookNow}
         className="py-4 px-2  flex justify-start items-center "
       >
-        <div className={`${timerDuration < 1 ? "opacity-50 bg-gray-200" : "bg-white"}  rounded-lg py-2 px-4 text-black border `}>
+        <div
+          className={`${
+            timerDuration < 1 ? "opacity-50 bg-gray-200" : "bg-white"
+          }  rounded-lg py-2 px-4 text-black border `}
+        >
           <div className="flex justify-center items-center gap-2 font-semibold">
             Book now
           </div>
