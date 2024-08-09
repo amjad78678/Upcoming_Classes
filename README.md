@@ -1,29 +1,23 @@
-Running the Project Locally
+
+## Running the Project Locally
+
 To get started with running the project locally, follow these steps:
 
-Clone the repository:
+1. Clone the repository:
+git clone https://github.com/amjad78678/Upcoming_Classes.git
 
-bash
-Copy code
-git clone <repository-url>
-Navigate to the project folder:
+2. Navigate to the project folder:
+cd Upcoming_Classes
 
-bash
-Copy code
-cd <project-folder-name>
-Install dependencies:
-
-bash
-Copy code
+3. Install dependencies:
 npm install
-Start the development server:
 
-bash
-Copy code
+4. Start the development server:
 npm start
+
 The project will run locally at http://localhost:3000.
 
 
+## How to Set Class Times for Upcoming Classes
 
-How to Give Class Time for the Upcoming Class
-The class times for upcoming classes can be modified in the file src/utils/classData.ts. This file contains dummy data, and you can update the classTime values to test the live functionality of the application.
+The class times for upcoming classes can be modified in the file `src/utils/classData.ts`. This file contains dummy data, and you can update the `classTime` values to test the live functionality of the application.
