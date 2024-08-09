@@ -15,7 +15,7 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className="flex flex-col justify-between h-full py-8 px-4">
+    <div className="flex flex-col justify-between h-full py-8 pl-8">
       <div className="flex flex-col gap-10">
         <div className="bg-white flex gap-3">
           <div className="w-10 h-10 bg-gray-200"></div>
@@ -91,7 +91,7 @@ const Sidebar = () => {
 
       <button
         onClick={() => setCurrentTab("Logout")}
-        className="flex justify-start items-center gap-2 "
+        className="flex justify-start items-center gap-2 pl-2"
       >
         <MdOutlineLogout
           className={`text-4xl ${tabLogoColor("Logout")} rounded-full p-2 `}

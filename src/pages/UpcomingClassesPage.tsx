@@ -1,6 +1,7 @@
 import Sidebar from "@/components/common/Sidebar";
 import UpcomingClass from "../components/Upcoming Classes/UpcomingClass";
 import Head from "@/components/Upcoming Classes/Head";
+import Navbar from "@/components/common/Navbar";
 
 const UpcomingClassesPage = () => {
   return (
@@ -11,7 +12,8 @@ const UpcomingClassesPage = () => {
         </div>
 
         <div className="col-span-10">
-          <div className="p-10">
+          <Navbar />
+          <div className="px-10">
             <Head />
             <UpcomingClass />
           </div>

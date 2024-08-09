@@ -25,6 +25,7 @@ dayjs.extend(advancedFormat);
 const UpcomingClass = () => {
   const { staffDetails } = useSelector((state: RootState) => state.appData);
 
+  //It fetches the staff details from the Redux store and updates the timer for each class
   const dispatch = useDispatch();
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,9 +50,9 @@ const UpcomingClass = () => {
     return () => clearInterval(interval);
   }, [dispatch, staffDetails]);
 
+  // For pagination 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  // Calculating the total pages
   const totalPages = Math.ceil(staffDetails.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -64,9 +65,9 @@ const UpcomingClass = () => {
       <table className="w-full border-collapse border-b mb-4">
         <thead>
           <tr className="text-gray-500 text-lg bg-gray-100 text-start">
-            <th className="py-4 px-8 text-start">Class name</th>
-            <th className="py-4 px-8 text-start">Staff name</th>
-            <th className="py-4 px-8 text-start">Actions</th>
+            <th className="py-4 px-4 text-start">Class name</th>
+            <th className="py-4 px-4 text-start">Staff name</th>
+            <th className="py-4 px-4 text-start">Actions</th>
           </tr>
         </thead>
 
@@ -105,7 +106,7 @@ const UpcomingClass = () => {
                     <div className="flex gap-4 justify-start items-center">
                       <div>
                         <Avatar>
-                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarImage src={data.staffImage} />
                           <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                       </div>
