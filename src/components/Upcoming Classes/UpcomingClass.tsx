@@ -23,9 +23,8 @@ import NoBookedClasses from "./NoBookedClasses";
 dayjs.extend(advancedFormat);
 
 const UpcomingClass = () => {
-  const { staffDetails } = useSelector((state: RootState) => state.appData);
-
   //It fetches the staff details from the Redux store and updates the timer for each class
+  const { staffDetails } = useSelector((state: RootState) => state.appData);
   const dispatch = useDispatch();
   useEffect(() => {
     const interval = setInterval(() => {

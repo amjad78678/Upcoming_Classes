@@ -11,6 +11,7 @@ const appSlice = createSlice({
     setStaffDetails: (state, action) => {
       state.staffDetails = action.payload;
     },
+    //Updating the staff timer for a specific user.
     setStaffTimer: (state, action) => {
       const { userId, timerDuration } = action.payload;
       const currentTime = Date.now();
@@ -34,6 +35,7 @@ const appSlice = createSlice({
       }
     },
 
+    //For running the timer for a specific user.
     updateTimer: (state, action) => {
       const { userId, timeRemaining } = action.payload;
       const staffIndex = state.staffDetails.findIndex(
@@ -48,10 +50,11 @@ const appSlice = createSlice({
         staff.classStartTime = Date.now();
         staff.timeRemaining = 0;
       } else if (!staff.isLive) {
-        // Continue updating the remaining time if not live
         staff.timeRemaining = timeRemaining;
       }
     },
+    
+    //For running the live time for a specific staff member.
     updateLiveTime: (state, action) => {
       const { userId, timeLive } = action.payload;
       const staffIndex = state.staffDetails.findIndex(
