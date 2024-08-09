@@ -23,7 +23,7 @@ const classData = [
     classStartTime: 0,
     timeLive: 0,
     staffImage: "priya.jpg",
-    classTime: "2024-08-09T00:15:00",
+    classTime: "2024-08-09T09:51:00",
   },
   {
     id: 3,

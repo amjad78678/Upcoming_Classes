@@ -4,13 +4,22 @@ import {
   DialogContent,
   DialogHeader,
   DialogFooter,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { setStaffTimer } from "@/store/slices/appSlice";
+import { formatDuration } from "@/utils/formatTime";
 
-const BookNowButton = ({ userId, timerDuration }) => {
+const BookNowButton = ({
+  userId,
+  timerDuration,
+}: {
+  userId: number;
+  timerDuration: number;
+}) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dispatch = useDispatch();
   const handleBookNow = () => {
@@ -31,7 +40,7 @@ const BookNowButton = ({ userId, timerDuration }) => {
       <button
         disabled={timerDuration < 1}
         onClick={handleBookNow}
-        className="py-4 px-2  flex justify-start items-center "
+        className=" py-4 px-2  flex justify-start items-center "
       >
         <div
           className={`${
@@ -39,17 +48,21 @@ const BookNowButton = ({ userId, timerDuration }) => {
           }  rounded-lg py-2 px-4 text-black border `}
         >
           <div className="flex justify-center items-center gap-2 font-semibold">
-            Book now
+            {timerDuration < 1 ? "Book later" : "Book now"}
           </div>
         </div>
       </button>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
-          <DialogHeader className="font-semibold text-2xl">
-            Are you sure ?
+          <DialogHeader>
+            <DialogTitle className="font-bold text-2xl">
+              Are you sure ?
+            </DialogTitle>
+            <DialogDescription className="text-lg font-semibold">
+              The class will start within {formatDuration(timerDuration)} time
+            </DialogDescription>
           </DialogHeader>
-          <p>The class will start in {timerDuration} seconds</p>
           <DialogFooter>
             <Button variant="secondary" onClick={handleCancel}>
               Cancel

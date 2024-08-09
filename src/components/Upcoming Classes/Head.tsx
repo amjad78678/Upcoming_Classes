@@ -8,7 +8,9 @@ import StaffDetails from "@/interfaces/iClassData";
 const Head = () => {
   const { staffDetails } = useSelector((state: RootState) => state.appData);
   const [checked, setChecked] = useState(false);
-  const [originalStaffDetails, setOriginalStaffDetails] = useState<StaffDetails[]>([]);
+  const [originalStaffDetails, setOriginalStaffDetails] = useState<
+    StaffDetails[]
+  >([]);
   const dispatch = useDispatch();
   const handleBookedFilter = () => {
     setChecked(!checked);
@@ -40,7 +42,8 @@ const Head = () => {
 
         <Checkbox
           onClick={handleBookedFilter}
-          className="rounded-md p-3 border border-gray-300 bg-transparent"
+          id="bookedOnly"
+          className="border-black rounded-md w-5 h-5 data-[state=checked]:bg-[black] data-[state=checked]:border-[#5B21B6]"
         />
       </div>
     </div>

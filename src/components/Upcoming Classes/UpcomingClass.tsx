@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -12,7 +12,6 @@ import isToday from "dayjs/plugin/isToday";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -20,6 +19,7 @@ import {
 } from "@/components/ui/pagination";
 dayjs.extend(isToday);
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import NoBookedClasses from "./NoBookedClasses";
 dayjs.extend(advancedFormat);
 
 const UpcomingClass = () => {
@@ -28,7 +28,7 @@ const UpcomingClass = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const interval = setInterval(() => {
-      staffDetails.forEach((staff, index) => {
+      staffDetails.forEach((staff) => {
         if (staff.isBooked && staff.timerEndTime > Date.now()) {
           const timeRemaining = Math.max(
             0,
@@ -53,13 +53,11 @@ const UpcomingClass = () => {
   const itemsPerPage = 5;
   // Calculating the total pages
   const totalPages = Math.ceil(staffDetails.length / itemsPerPage);
-  // Determine the items to be shown on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = staffDetails.slice(indexOfFirstItem, indexOfLastItem);
-
   // Function to change the page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="my-4">
@@ -73,66 +71,78 @@ const UpcomingClass = () => {
         </thead>
 
         <tbody className="">
-          {currentItems.map((data, index) => (
-            <tr key={data.id} className="border-b">
-              <td className="py-4 px-2 ">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 flex justify-center items-center">
-                    <span>{data.id}</span>
-                  </div>
-                  <div className=" flex flex-col justify-center items-start">
-                    <span className="font-bold">{data.className}</span>
-                    {data.isLive ? (
-                      <div className="">
-                        <span className="inline-block w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                        <span className="text-red-500">
-                          Live
-                          <span className="text-gray-400">
-                            ({formatTime(data.timeLive)})
-                          </span>
-                        </span>
+          {currentItems.length > 0 ? (
+            currentItems.map((data) => (
+              <>
+                <tr key={data.id} className="border-b ">
+                  <td className="py-4 px-2 ">
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 flex justify-center items-center">
+                        <span>{data.id}</span>
                       </div>
-                    ) : dayjs(data.classTime).isToday() ? (
-                      <p>Today {dayjs(data.classTime).format("h:mm A")}</p>
-                    ) : (
-                      <p>{dayjs(data.classTime).format("Do MMMM hA")}</p>
-                    )}
-                  </div>
-                </div>
-              </td>
-              <td className="py-4 px-2 ">
-                <div className="flex gap-4 justify-start items-center">
-                  <div>
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div>
-                    <span>{data.staffName}</span>
-                    <div>
-                      <p className="text-gray-400">Additional details</p>
+                      <div className=" flex flex-col justify-center items-start">
+                        <span className="font-bold">{data.className}</span>
+                        {data.isLive ? (
+                          <div className="">
+                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                            <span className="text-red-500">
+                              Live
+                              <span className="text-gray-400">
+                                ({formatTime(data.timeLive)})
+                              </span>
+                            </span>
+                          </div>
+                        ) : dayjs(data.classTime).isToday() ? (
+                          <p>Today {dayjs(data.classTime).format("h:mm A")}</p>
+                        ) : (
+                          <p>{dayjs(data.classTime).format("Do MMMM hA")}</p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                {data.isBooked && data.timeRemaining > 0 ? (
-                  <TimerButton {...{ timeRemaining: data.timeRemaining }} />
-                ) : data.isLive && data.timeRemaining === 0 ? (
-                  <JoinButton />
-                ) : (
-                  <BookNowButton
-                    userId={data.id}
-                    timerDuration={Math.max(
-                      0,
-                      dayjs(data.classTime).diff(dayjs(), "second")
+                  </td>
+
+                  <td className="py-4 px-2 ">
+                    <div className="flex gap-4 justify-start items-center">
+                      <div>
+                        <Avatar>
+                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <div>
+                        <span className="font-bold">{data.staffName}</span>
+                        <div>
+                          <p className="text-gray-400">Additional details</p>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    {data.isBooked && data.timeRemaining > 0 ? (
+                      <TimerButton {...{ timeRemaining: data.timeRemaining }} />
+                    ) : data.isLive && data.timeRemaining === 0 ? (
+                      <JoinButton />
+                    ) : (
+                      <BookNowButton
+                        userId={data.id}
+                        timerDuration={Math.max(
+                          0,
+                          dayjs(data.classTime).diff(dayjs(), "second")
+                        )}
+                      />
                     )}
-                  />
-                )}
+                  </td>
+                </tr>
+              </>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3}>
+                <NoBookedClasses />
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

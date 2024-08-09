@@ -10,7 +10,7 @@ function formatTime(seconds: number) {
   }
   
 
-function formatDuration(seconds) {
+function formatDuration(seconds: number) {
   const dur = dayjs.duration(seconds, 'seconds');
   const hours = Math.floor(dur.asHours());
   const minutes = Math.floor(dur.asMinutes()) % 60;
